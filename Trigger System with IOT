@@ -1,0 +1,37 @@
+Components Required
+1. Arduino Board
+2. Relay Module
+3. Trigger(Alarm) Bell
+4. Power Supply
+5. Wiring
+6. Internet Connection Module (e.g., Wi-Fi module)
+7. Current-Sufficient Power Supply
+8. Sensors (Optional, based on specific detection needs)
+
+int buzzerPin = 8;  
+
+void setup() {
+  pinMode(buzzerPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char command = Serial.read();
+    if (command == '1') {
+      digitalWrite(buzzerPin, HIGH); 
+      delay(2000);  
+      digitalWrite(buzzerPin, LOW); 
+    }
+  }
+}
+import serial
+import time
+
+arduino_port = '/dev/ttyUSB0'  
+baud_rate = 9600
+arduino = serial.Serial(arduino_port, baud_rate)
+time.sleep(2) 
+def trigger_buzzer():
+    arduino.write(b'1')
+arduino.close()
